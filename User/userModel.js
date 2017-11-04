@@ -60,3 +60,5 @@ flag.statics.compare = function(username,password){
 }
 
 var model = mongoose.model('user',flag);
+
+module.exports = model;

@@ -1,3 +1,6 @@
+//require mongoose:
+const mongoose = require('mongoose');
+
 //jwt.js
 const {issueToken} = require('./jwt.js');
 const {verifyToken} = require('./jwt.js');
@@ -19,6 +22,31 @@ const {userFindById} = require('./User/controller.js');
 
 //docker.js "node docker {port} {servfile}"
 
+//mongoConnect
+var mongoConnect = (url)=>{
+	return new Promise((resolve,reject)=>{
+		mongoose.connect(url,{useMongoClient:true},(err,db)=>{
+			if(err){
+				reject(err);
+			}
+			resolve(db);
+		});
+	});
+}
+
+var dockerImgCreate = (port,servfile)=>{
+	const dockerImg = require('./docker.js');
+	dockerImg(port,servfile,(err)=>{
+		if(err){
+			console.log(err);
+			return;
+		}
+		console.log("Dockerfile Created.");
+	});
+}
+
+dockerImgCreate("3000","app");
+
 module.exports = {
 
 	//token
@@ -38,6 +66,12 @@ module.exports = {
 	userUpdate,
 	userFindByUsername,
 	userFindByName,
-	userFindById
+	userFindById,
+	
+	//MongoDb Connection
+	mongoConnect,
+
+	//Dockerfile
+	dockerImgCreate
 
 }

@@ -1,5 +1,6 @@
 const model = require('./userModel.js');
 const {isObjValid} = require('./../objectop.js');
+const mongoose = require('mongoose');
 
 var userCreate = (object)=>{
 	return new Promise((resolve,reject)=>{
@@ -27,6 +28,7 @@ var userFindByUsername = (username)=>{
 }
 
 var userFindByName = (name)=>{
+
 	return new Promise((resolve,reject)=>{
 		model.find({name:name}).then((result)=>{
 			if(result.length == 0){
@@ -88,6 +90,8 @@ var userRemove = (username)=>{
 	})
 }
 
+
+
 module.exports = {
 
 	userCreate,
@@ -96,6 +100,6 @@ module.exports = {
 	userFindByName,
 	userFindByUsername,
 	userRemove,
-	userFindById
+	userFindById,
 
 }
