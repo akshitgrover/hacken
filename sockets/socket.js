@@ -9,7 +9,6 @@ const socketFunction = (server)=>{
 		socket.on('init',(username,cb)=>{
 			console.log(username + " Requested To Join.");
 			User.findOne({username:username}).then((result)=>{
-				console.log(result);
 				if(!result){
 					return cb("Invalid Username.");
 				}
