@@ -1,12 +1,12 @@
 {
-  "name": "unicorn",
+  "name": "Hacken",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/**.test.js"
   },
-  "author": "",
+  "author": "Akshit Grover",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
