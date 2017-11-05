@@ -1,7 +1,7 @@
 const Room = require('./roomModel.js');
 const User = require('./../User/userModel.js')
 
-const serverFunction = (server)=>{
+const socketFunction = (server)=>{
 	const socketIO = require('socket.io');
 	const io = socketIO(server);
 
@@ -49,6 +49,6 @@ const serverFunction = (server)=>{
 
 module.exports = {
 
-	serverFunction
+	socketFunction
 
 }

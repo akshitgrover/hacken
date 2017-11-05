@@ -1,4 +1,5 @@
 const model = require('./userModel.js');
+const roomModel = require('./../sockets/roomModel.js');
 const {isObjValid} = require('./../objectop.js');
 const mongoose = require('mongoose');
 
@@ -9,7 +10,7 @@ var userCreate = (object)=>{
 		}).then((user)=>{
 			resolve(user);
 		}).catch((err)=>{
-			reject("Error.");
+			reject(err);
 		});
 	});
 }
@@ -20,9 +21,9 @@ var userFindByUsername = (username)=>{
 			if(!result){
 				reject("No User Found.");
 			}
-			resolve(user);
+			resolve(result);
 		}).catch((err)=>{
-			reject("Error.");
+			reject(err);
 		})
 	});
 }
@@ -36,7 +37,7 @@ var userFindByName = (name)=>{
 			}
 			resolve(result);
 		}).catch((err)=>{
-			reject("Something Went Wrong.");
+			reject(err);
 		});
 	});
 }
@@ -53,13 +54,16 @@ var userLogin = (username,password)=>{
 
 var userUpdate = (username,object)=>{
 	return new Promise((resolve,reject)=>{
+		if(object.password){
+			reject("Cannot Update Password.");
+		}
 		model.findOneAndUpdate({username:username},object).then((result)=>{
 			if(!result){
 				reject("Invalid Username.");
 			}
 			resolve({msg:"Updated",user:result});
 		}).catch((err)=>{
-			reject("Error.");
+			reject(err);
 		});
 	});
 }
@@ -72,7 +76,7 @@ var userFindById = (id)=>{
 		model.findById(id).then((result)=>{
 			resolve(result);
 		}).catch((err)=>{
-			reject("Error.");
+			reject(err);
 		})
 	});
 }
@@ -85,12 +89,38 @@ var userRemove = (username)=>{
 			}
 			resolve(result);
 		}).catch((err)=>{
-			reject("Error.");
+			reject(err);
 		});
 	})
 }
 
+var roomFind = (username,page,length)=>{
+	return new Promise((resolve,reject)=>{
+		model.findOne({username:username}).populate({path:'chatroom',select:'id -_id',options:{limit:length,skip:length*(page-1)}}).then((result)=>{
+			console.log(result);
+			if(!result){
+				reject("Invalid Username.");
+			}
+			resolve(result);
+		}).catch((err)=>{
+			console.log(err);
+			reject("Couldn't Pass The Query. Check Page, Length, Username Parameters.");
+		});
+	});
+}
 
+var msgFind = (room)=>{
+	return new Promise((resolve,reject)=>{
+		roomModel.findOne({id:room},{messages:1,_id:0}).then((result)=>{
+			if(!result){
+				reject("Invalid RoomId.");
+			}
+			resolve(result);
+		}).catch((err)=>{
+			reject("Couldn't Padd The Parameters.");
+		});
+	});
+}
 
 module.exports = {
 
@@ -101,5 +131,7 @@ module.exports = {
 	userFindByUsername,
 	userRemove,
 	userFindById,
+	roomFind,
+	msgFind
 
 }

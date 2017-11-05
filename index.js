@@ -19,11 +19,13 @@ const {userFindByName} = require('./User/controller.js');
 const {userFindByUsername} = require('./User/controller.js');
 const {userRemove} = require('./User/controller.js');
 const {userFindById} = require('./User/controller.js');
+const {roomFind} = require('./User/controller.js');
+const {msgFind} = require('./User/controller.js');
 
 //docker.js "node docker {port} {servfile}"
 
 //mongoConnect
-var mongoConnect = (url)=>{
+const mongoConnect = (url)=>{
 	return new Promise((resolve,reject)=>{
 		mongoose.connect(url,{useMongoClient:true},(err,db)=>{
 			if(err){
@@ -34,7 +36,8 @@ var mongoConnect = (url)=>{
 	});
 }
 
-var dockerImgCreate = (port,servfile)=>{
+//docker image
+const dockerImgCreate = (port,servfile)=>{
 	const dockerImg = require('./docker.js');
 	dockerImg(port,servfile,(err)=>{
 		if(err){
@@ -45,7 +48,8 @@ var dockerImgCreate = (port,servfile)=>{
 	});
 }
 
-dockerImgCreate("3000","app");
+//Socket.IO
+const {socketFunction} = require('./sockets/socket.js');
 
 module.exports = {
 
@@ -67,11 +71,16 @@ module.exports = {
 	userFindByUsername,
 	userFindByName,
 	userFindById,
+	roomFind,
+	msgFind,
 	
 	//MongoDb Connection
 	mongoConnect,
 
 	//Dockerfile
-	dockerImgCreate
+	dockerImgCreate,
+
+	//socket.IO
+	socketFunction
 
 }

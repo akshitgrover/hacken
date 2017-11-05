@@ -28,7 +28,7 @@ var verifyToken = (token,secret)=>{
 	});
 }
 
-var decodeToken = (token,cb)=>{
+var decodeToken = (token)=>{
 	if(!token){
 		throw Error({err:"Incomplete Details."});
 	}

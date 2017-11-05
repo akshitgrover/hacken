@@ -9,6 +9,7 @@ var flag = new Schema({
 
 	username:{
 		type:'string',
+		unique:[true,"Username Already Taken."],
 		required:[true,"Username Is Required."]
 	},
 	password:{
@@ -54,7 +55,8 @@ flag.statics.compare = function(username,password){
 			}
 			resolve("Authorized");
 		}).catch((err)=>{
-			reject("Soemthing Went Wrong.")
+			console.log(err);
+			reject("Something Went Wrong.")
 		});
 	});
 }

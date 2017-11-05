@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require('http');
-const {serverFunction} = require('./socket.js');
+const {socketFunction} = require('./socket.js');
 const path = require('path');
 const {mongoConnect} = require('./../index.js');
 
@@ -20,6 +20,6 @@ mongoConnect("mongodb://localhost:27017/node_playground",()=>{
 
 
 
-serverFunction(server);
+socketFunction(server);
 
 server.listen(3000);
