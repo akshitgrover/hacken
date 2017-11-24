@@ -1,12 +1,17 @@
 {
   "name": "hacken",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/**.test.js"
   },
-  "author": "Akshit Grover",
+  "author":{
+    "name":"Akshit Grover",
+    "email":"akshit.grover2016@gmail.com",
+    "github":"https://github.com/akshitgrover",
+    "stackoverflow":"https://stackoverflow.com/users/8884463/akshit-grover"
+  },
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
