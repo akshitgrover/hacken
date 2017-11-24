@@ -12,7 +12,8 @@ const socketFunction = (server)=>{
 				if(!result){
 					return cb("Invalid Username.");
 				}
-				io.emit('newUser',{msg:username + " Joined."});
+				socket.join('boradcast');
+				io.to('boradcast').emit('newUser',{msg:username + " Joined."});
 			}).catch((err)=>{
 				cb(err);
 			});
@@ -32,7 +33,7 @@ const socketFunction = (server)=>{
 					}
 					room.messages.push({username:obj.username,text:obj.text,time:obj.time});
 					room.save();
-					io.emit('recieveMessage',obj);
+					io.to('broadcast').emit('recieveMessage',obj);
 				}).catch((err)=>{
 					console.log(err);
 					cb(err);

@@ -1,6 +1,6 @@
 {
-  "name": "Hacken",
-  "version": "1.0.0",
+  "name": "hacken",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,5 +21,12 @@
     "expect": "^21.2.1",
     "express": "^4.16.2",
     "mocha": "^4.0.1"
-  }
+  },
+  "repository":{
+    "type":"git",
+    "url":"https://github.com/akshitgrover/hacken"
+  },
+  "keywords":[
+    "hack","hacken","sockets","models","user","jwt","hackathon","authenticate","socket","tokens","backend"
+  ]
 }

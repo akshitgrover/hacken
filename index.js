@@ -8,7 +8,7 @@ const {decodeToken} = require('./jwt.js');
 
 //objectop.js
 const {isObjValid} = require("./objectop.js");
-const {toObjMap} = require("./objectop.js");
+const {toObjId} = require("./objectop.js");
 const {arrObjMap} = require("./objectop.js");
 
 //userModel.js
@@ -60,7 +60,7 @@ module.exports = {
 
 	//object
 	isObjValid,
-	toObjMap,
+	toObjId,
 	arrObjMap,
 	
 	//user
