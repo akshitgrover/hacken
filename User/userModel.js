@@ -42,7 +42,7 @@ var flag = new Schema({
 
 });
 
-flag.methods.hashAndSave = function(){
+flag.statics.hashAndSave = function(){
 	this.password = bcrypt.hashSync(this.password);
 	return this.save();
 }
